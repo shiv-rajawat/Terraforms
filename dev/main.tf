@@ -1,20 +1,8 @@
-terraform {
-  backend "s3" {
-    encrypt = true
-    bucket = "shiv-terraform-state"
-    dynamodb_table = "terraform-state-lock"
-    key    = "global/s3/terraform.tfstate"
-    region = "us-east-2"
-  }
-}
+##Dev configurations
 
-provider "aws" {
-  region = "us-east-2"
-}
 
 module "vpc" {
   source = "../modules/vpc"
-
   cidr_block = "${var.vpc_cidr_block}"
   vpc_name = "${var.vpc_name}"
 }
