@@ -1,8 +1,8 @@
-variable "vpnName"{
+variable "vpngw_name"{
   type = "string"
 }
 
-variable "vpcid"{
+variable "vpc_id"{
   type = "string"
 }
 

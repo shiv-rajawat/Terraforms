@@ -1,7 +1,7 @@
-variable "routeName"{
+variable "route_table_name"{
   type = "string"
 }
 
-variable "vpcid"{
+variable "vpc_id"{
   type = "string"
 }

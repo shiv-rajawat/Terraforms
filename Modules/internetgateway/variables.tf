@@ -1,7 +1,7 @@
-variable "gatewayName"{
+variable "internet_gateway_name"{
   type = "string"
 }
 
-variable "vpcid"{
+variable "vpc_id"{
   type = "string"
 }

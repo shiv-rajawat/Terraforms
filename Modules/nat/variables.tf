@@ -2,10 +2,10 @@ variable "eipid"{
   type = "string"
 }
 
-variable "subnetid"{
+variable "subnet_id"{
   type = "string"
 }
 
-variable "natName"{
+variable "natgw_name"{
   type = "string"
 }

@@ -1,8 +1,8 @@
 resource "aws_vpn_gateway" "vpn_gw" {
-  vpc_id = "${var.vpcid}"
+  vpc_id = "${var.vpc_id}"
   availability_zone = "${var.availability_zone}"
 
   tags {
-    Name = "${var.vpnName}"
+    Name = "${var.vpngw_name}"
   }
 }

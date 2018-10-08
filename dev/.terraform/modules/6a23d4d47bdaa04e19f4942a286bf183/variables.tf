@@ -1,8 +1,4 @@
-variable "groupName"{
-  type = "string"
-}
-
-variable "nameTag"{
+variable "security_group_name"{
   type = "string"
 }
 
@@ -10,10 +6,10 @@ variable "description"{
   type = "string"
 }
 
-variable "vpcid"{
+variable "vpc_id"{
   type = "string"
 }
 
-variable "ingressCIDRblock" {
-        type = "list"
+variable "sg_ingress_cidr_block" {
+  type = "list"
 }
