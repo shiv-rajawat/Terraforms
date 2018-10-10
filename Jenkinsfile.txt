@@ -1,0 +1,22 @@
+def tfPlanExitCode
+
+node {
+  stage('Checkout') {
+    checkout scm
+  }
+  stage('Plan') {
+    tfPlanExitCode = sh('terraform plan -out=create.tfplan -detailed-exitcode', [returnStatus: true])
+    stash 'workspace'
+  }
+}
+
+if (tfPlanExitCode == "2") {
+  input('Deploy stack?')
+
+  stage('Apply') {
+    node {
+      unstash 'workspace'
+      sh 'terraform apply -no-color create.tfplan'
+    }
+  }
+}
