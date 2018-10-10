@@ -1,22 +1,23 @@
-def tfPlanExitCode
-
-node {
-  stage('Checkout') {
-    checkout scm
+pipeline {
+  agent any
+  environment {
+      AWS_ACCESS_KEY_ID     = credentials('access-key')
+      AWS_SECRET_ACCESS_KEY = credentials('secret-key')
   }
-  stage('Plan') {
-    tfPlanExitCode = sh('terraform plan -out=create.tfplan -detailed-exitcode', [returnStatus: true])
-    stash 'workspace'
-  }
-}
-
-if (tfPlanExitCode == "2") {
-  input('Deploy stack?')
-
-  stage('Apply') {
-    node {
-      unstash 'workspace'
-      sh 'terraform apply -no-color create.tfplan'
+  stages {
+    stage('Checkout') {
+        steps {
+          checkout scm
+          sh 'mkdir -p creds'
+          sh 'echo $AWS_ACCESS_KEY_ID | base64 -d > ./creds/accesskey.json'
+          sh 'echo $AWS_SECRET_ACCESS_KEY | base64 -d > ./creds/secretkey.json'
+        }
+      }
+    stage("Init"){
+      steps {
+        sh 'terraform init'
+        sh 'terraform apply -input=false -auto-approve'
+      }
     }
-  }
-}
+    }
+    }
